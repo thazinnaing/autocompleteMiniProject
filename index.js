@@ -289,6 +289,13 @@ fetchData.then(response => response.json())
               productImage.src=resultProduct[index].image;
 
               productItemContainer.append(productName, productImage);
+              productItemContainer.addEventListener("keyup",(event)=>{
+                if(event.key==="Enter"){
+                  console.log("1111, Enter");
+                  location.href="details.html";
+
+                }
+              })
               resultContainer.append(productItemContainer);
       }
   }
@@ -328,7 +335,8 @@ fetchData.then(response => response.json())
 
       }
       else{
-          productDeselection();
+          console.log("2222 Enter");
+
 
       }
 
@@ -347,5 +355,4 @@ fetchData.then(response => response.json())
       productToDeselect.classList.remove("selected");
   }
 })
-
 
