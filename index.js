@@ -289,13 +289,6 @@ fetchData.then(response => response.json())
               productImage.src=resultProduct[index].image;
 
               productItemContainer.append(productName, productImage);
-              productItemContainer.addEventListener("keyup",(event)=>{
-                if(event.key==="Enter"){
-                  console.log("1111, Enter");
-                  location.href="details.html";
-
-                }
-              })
               resultContainer.append(productItemContainer);
       }
   }
@@ -335,7 +328,13 @@ fetchData.then(response => response.json())
 
       }
       else{
-          console.log("2222 Enter");
+          const productItemContainer=document.getElementsByClassName("productItemContainer")[0];
+          console.log(productItemContainer);
+          const hasSelectedProduct=productItemContainer.classList.contains("selected");
+          console.log(productItemContainer.id, hasSelectedProduct);
+          if(hasSelectedProduct){
+            localStorage.setItem("productId",productItemContainer.id);
+          }
 
 
       }
