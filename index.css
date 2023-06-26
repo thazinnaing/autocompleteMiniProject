@@ -21,7 +21,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 600px;
+    width: 95%;
     height: 50px;
 }
 .search{
@@ -58,24 +58,31 @@ body{
 .resultContainer{
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 95%;
 }
 .productItemContainer{
     display: flex;
     align-items: center;
-    width: 100%;
     height: 80px;
 }
 .productName{
     width: 90%;
     height: 100%;
     padding-left: 10px;
+    padding-right: 10px;
     display: flex;
     align-items: center;
 }
 .productImage{
-    height: 50px;
+    height: 50%;
     width: 50px;
-    background-color: lightgreen;
+}
+@media screen and (min-width: 640px) {
+    .searchContainer{
+        width: 600px;
+    }
+    .resultContainer{
+        width: 600px;
+    }
     
 }

@@ -241,8 +241,8 @@
 //     }
 // ]
 
-let fetchData=fetch("https://fakestoreapi.com/products")
-fetchData.then(response => response.json())
+fetch("https://fakestoreapi.com/products")
+.then(response => response.json())
 .then(productStore => {
   const autocompleteInput=document.getElementsByClassName("autocompleteInput")[0];
   const resultContainer=document.getElementsByClassName("resultContainer")[0];
@@ -253,18 +253,33 @@ fetchData.then(response => response.json())
   })
 
   let resultProduct=[];
+  let selectIndex=-1;
+
   autocompleteInput.addEventListener("keyup",(event)=>{
       if(event.key=== "ArrowUp" || event.key==="ArrowDown" || event.key==="Enter"){
+        const input=event.target.value;
+        if(input.length === 0){
+            console.log("no product for arrow");
+            return;
+        }
           selectProduct(event.key);
           return;
           
       }
       
       resultContainer.innerHTML="";
+      
 
       const searchInput=event.target.value.toLowerCase();
 
+      console.log(searchInput.length);
+
       if(searchInput.length === 0){
+
+        console.log("Input length is 0");
+
+        selectIndex=-1;
+        
           return;
       }
 
@@ -277,7 +292,8 @@ fetchData.then(response => response.json())
       if(hasProductToShow){
           for(let index=0; index<resultProduct.length; index++){
               const productItemContainer=document.createElement("div");
-              productItemContainer.classList.add("productItemContainer")
+              productItemContainer.classList.add("productItemContainer");
+
               productItemContainer.id=resultProduct[index].id;
 
               const productName=document.createElement("div");
@@ -294,7 +310,7 @@ fetchData.then(response => response.json())
   }
       
   })
-  let selectIndex=-1;
+ 
   const selectProduct=(key)=>{
       if(key === "ArrowDown"){
           if(selectIndex === resultProduct.length-1){
@@ -328,13 +344,17 @@ fetchData.then(response => response.json())
 
       }
       else{
-          const productItemContainer=document.getElementsByClassName("productItemContainer")[0];
-          console.log(productItemContainer);
-          const hasSelectedProduct=productItemContainer.classList.contains("selected");
-          console.log(productItemContainer.id, hasSelectedProduct);
-          if(hasSelectedProduct){
-            localStorage.setItem("productId",productItemContainer.id);
-          }
+        console.log("eeee");
+        if(selectIndex === -1){
+            console.log("no select product");
+            return;
+        }
+        else{
+            const enterId= resultProduct[selectIndex].id;
+            console.log("enterId", enterId);
+            localStorage.setItem("productId", enterId);
+            location.href="details.html";
+        }
 
 
       }
